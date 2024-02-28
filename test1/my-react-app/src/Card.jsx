@@ -18,7 +18,7 @@ function Card(props){
     if(weatherCode == 800){emoji = "🌞";}
     if(weatherCode == 801){emoji = "🌤️";}
     if(weatherCode == 802){emoji = "⛅";}
-    if(weatherCode >= 803 && weatherCode <= 804){emoji = "☁";}
+    if(weatherCode >= 803 && weatherCode <= 804){emoji = "☁️";}
 
 
     return(
