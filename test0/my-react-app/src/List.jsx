@@ -18,7 +18,7 @@ function List(){
                     {id: 3,name: "Super Smash Bros", genre: "FTG", rating: 85},
                     {id: 4,name: "Minecraft", genre: "Sandbox", rating: 100},
                     {id: 5,name: "Pokemon Sword", genre: "RPG", rating: 50},
-                    {id: 5,name: "Pokemon Violet", genre: "RPG", rating: 75},
+                    {id: 6,name: "Pokemon Violet", genre: "RPG", rating: 75},
                    ];
 
     //for every item in games, create a list item of game
