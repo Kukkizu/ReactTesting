@@ -9,14 +9,6 @@ function Search({setWeatherData}){
     let searchStyle = {fontSize:"2.2rem", fontFamily:"Segoe UI", borderRadius:"10px"};
     let buttonStyle = {fontSize:"1rem", fontFamily:"Segoe UI", borderRadius:"10px"};
 
-    /*
-    const [emoji, setEmoji] = useState("❓");
-    const [city, setCity] = useState("City");
-    const [state, setState] = useState("State");
-    const [weather, setWeather] = useState("Weather");
-    const [temperature, setTemperature] = useState("Temperature");
-    */
-
     const [input, setInput] = useState("");
 
     function changeString(event){
