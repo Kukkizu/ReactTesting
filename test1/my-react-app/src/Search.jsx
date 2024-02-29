@@ -1,9 +1,10 @@
 
 import React, {useState} from "react";
+import apiKey from './key.js'; // Path to your apiKey.js file
 
 function Search({setWeatherData}){
 
-    let apiKey = "00814c46b00441bcd957e27306c80b63";
+    
 
     let divStyle = {display: "flex", flexDirection: ""};
     let searchStyle = {fontSize:"2.2rem", fontFamily:"Segoe UI", borderRadius:"10px"};
