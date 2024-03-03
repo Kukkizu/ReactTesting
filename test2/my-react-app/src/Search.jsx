@@ -24,6 +24,8 @@ function Search({setWeatherData}){
             console.log(json);
             const relData = [input, json.sys.country, json.weather[0].description, json.main.temp, json.weather[0].id];
             setWeatherData(relData);
+
+            
         });
     };
 
