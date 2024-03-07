@@ -13,10 +13,10 @@ function Search({searchInput}){
         setInput(event.target.value);
     }
 
-    //Sends user search up to App.jsx
+    /* Sends user search up to App.jsx
     const enterSearch = (input) => {
-        searchInput(input);
-    };
+        liftUserInput(input);
+    }; */
 
     return(
         <div style = {divStyle}>
