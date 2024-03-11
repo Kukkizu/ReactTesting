@@ -36,55 +36,70 @@ function App() {
     }
 
     function parseUsefulData(data){
-        const fiveDayWeather = [
-            { dayOfWeek: "", monthDay: "", avgTemp: null, weatherCode: null, rainPercentage: null },
-            { dayOfWeek: "", monthDay: "", avgTemp: null, weatherCode: null, rainPercentage: null },
-            { dayOfWeek: "", monthDay: "", avgTemp: null, weatherCode: null, rainPercentage: null },
-            { dayOfWeek: "", monthDay: "", avgTemp: null, weatherCode: null, rainPercentage: null },
-            { dayOfWeek: "", monthDay: "", avgTemp: null, weatherCode: null, rainPercentage: null }
-        ];
         
-        const allCodes = [[], [], [], [], []];
-        const allDays = [];
-        const allDateObj = [];
-        var i = 0;
-        for (var j = 0; j < 5; j++) {
-        
-            allDays.push(data.list[i].dt_txt.slice(0, 10));
-            const date = new Date(allDays[j]);
-        
-            fiveDayWeather[j].dayOfWeek = date.toLocaleString('en-US', { weekday: 'long' });
-            fiveDayWeather[j].monthDay = date.toLocaleString('en-US', { month: 'long' });
-        
-            var totalTemp = 0;
-            var totalRain = 0;
-            var timeSlots = 0;
-            //WHILE THE DAYS ARE THE SAME
-            while (allDays[j] === data.list[i].dt_txt.slice(0, 10) && i < data.list.length) {
-        
-                totalTemp += data.list[i].main.temp;
-                totalRain += data.list[i].rain;
-        
-                //console.log(data.list[i].rain['3h']);
-        
-                allCodes[j].push(data.list[i].weather[0].id);
-                i++;
-                timeSlots++;
-            }
-            //console.log(`timeSlots: ${timeSlots}, totalTime: ${totalTemp}`);
-        
-            fiveDayWeather[j].avgTemp = Math.floor(totalTemp / timeSlots);
-        
-        }
-        console.log(allDays);
-        //console.log(allCodes);
-        const commonCodes = [];
-        for (var k = 0; k < allCodes.length; k++) {
-            commonCodes.push(findMostCommonValue(allCodes[k]));
-        }
-        console.log(commonCodes);
-        
-        console.log(fiveDayWeather);
+  const fiveDayWeather = [{dayOfWeek: "", monthDay: "", avgTemp: null, weatherCode: null, avgRain: null},
+                          {dayOfWeek: "", monthDay: "", avgTemp: null, weatherCode: null, avgRain: null},
+                          {dayOfWeek: "", monthDay: "", avgTemp: null, weatherCode: null, avgRain: null},
+                          {dayOfWeek: "", monthDay: "", avgTemp: null, weatherCode: null, avgRain: null},
+                          {dayOfWeek: "", monthDay: "", avgTemp: null, weatherCode: null, avgRain: null},
+                          {dayOfWeek: "", monthDay: "", avgTemp: null, weatherCode: null, avgRain: null},];
+
+  const allCodes = [[],[],[],[],[],[]];
+  const allDays = [];
+  const allDateObj = [];
+  var i = 0;
+  for (var j = 0; j < 6; j++){
+    
+    allDays.push(data.list[i].dt_txt.slice(0,10));
+    const date = new Date(allDays[j]);
+
+    fiveDayWeather[j].dayOfWeek = date.toLocaleString('en-US', { weekday: 'long' });
+    fiveDayWeather[j].monthDay = date.toLocaleString('en-US', { month: 'long' });
+
+    var totalTemp = 0;
+    var totalRain = 0;
+    var tempTimePeriods = 0;
+    var rainTimePeriods = 0;
+
+    //WHILE THE DAYS ARE THE SAME
+    while (allDays[j] === data.list[i].dt_txt.slice(0,10) && i < data.list.length -1){
+
+      //console.log("ITERATION: " + i);
+      
+      totalTemp += data.list[i].main.temp;
+
+      try{
+        totalRain += data.list[i].rain['3h'];        
+        console.log(data.list[i].rain['3h']);
+        rainTimePeriods++;
+      }catch(Error){
+        console.error("ERROR: Rain % is undefined.");
+      }
+
+      allCodes[j].push(data.list[i].weather[0].id);
+
+      i++;
+      tempTimePeriods++;
+    }
+    //console.log(`tempTimePeriods: ${tempTimePeriods}, totalTime: ${totalTemp}`);
+    console.log(`rainTimePeriods: ${rainTimePeriods}, totalRain: ${totalRain}`);
+
+    fiveDayWeather[j].avgTemp = Math.floor(totalTemp / tempTimePeriods);
+    fiveDayWeather[j].avgRain = (totalRain / rainTimePeriods).toFixed(2);
+
+  }
+  console.log(allDays);
+  //console.log(allCodes);
+  const commonCodes = [];
+  for(var k = 0; k < allCodes.length; k++){
+    fiveDayWeather[k].weatherCode = findMostCommonValue(allCodes[k]);
+  }
+  console.log(commonCodes);
+
+  console.log(fiveDayWeather);
+
+  console.log("L = "+data.list.length);
+  console.log(data.list[35].rain['3h']);
         
          
         
