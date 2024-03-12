@@ -1,13 +1,12 @@
-import React, {useState} from "react";
+import PropTypes from 'prop-types';
 
 function Card(props){
 
-    const city = props.weatherData[0];
-    const country = props.weatherData[1];
-    const weather =  props.weatherData[2];
-    const temperature = Math.round(props.weatherData[3]);
-    const weatherCode = props.weatherData[4];
-    const date = props.weatherData[5];
+    const dayOfWeek = props.dayOfWeek;
+    const monthDay = props.monthDay;
+    const avgTemp = props.avgTemp;
+    const weatherCode = props.weatherCode;
+    const avgRain = Math.round(props.avgRain * 100);
 
     var emoji;
 
@@ -25,12 +24,16 @@ function Card(props){
     return(
         <div className="card">
             <h1 className="card-emoji">{emoji}</h1>
-            <h2 className="card-title">{city}, {country}</h2>
-            <h4 className="card-text">{weather}</h4>
-            <h4 className="card-text">{temperature}°F</h4>
+            <h2 className="card-title">{dayOfWeek} {monthDay}</h2>
+            <h4 className="card-text">{weatherCode}</h4>
+            <h4 className="card-text">{avgTemp}°F</h4>
+            <h4 className="card-text">Chance of Rain: {avgRain}%</h4>
+
         </div>
     );
 }
+
+
 
 
 export default Card
