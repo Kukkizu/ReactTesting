@@ -20,20 +20,38 @@ function Card(props){
     if(weatherCode == 802){emoji = "⛅";}
     if(weatherCode >= 803 && weatherCode <= 804){emoji = "☁️";}
 
+    var rainText = `${avgRain}%`;
+    if(avgRain < 0){
+        rainText = `N/A`;
+    }
+
 
     return(
         <div className="card">
             <h1 className="card-emoji">{emoji}</h1>
             <h2 className="card-title">{dayOfWeek} {monthDay}</h2>
-            <h4 className="card-text">{weatherCode}</h4>
             <h4 className="card-text">{avgTemp}°F</h4>
-            <h4 className="card-text">Chance of Rain: {avgRain}%</h4>
+            <h4 className="card-text">Chance of Rain: {rainText}</h4>
 
         </div>
     );
 }
 
 
+Card.propTypes = {
+    dayOfWeek: PropTypes.string.isRequired,
+    monthDay: PropTypes.string.isRequired,
+    avgTemp: PropTypes.number.isRequired,
+    weatherCode: PropTypes.number.isRequired,
+    avgRain: PropTypes.number.isRequired,
+};
 
+Card.defaultProps = {
+    dayOfWeek: "Sunday",
+    monthDay: "January 01",
+    avgTemp: 75,
+    weatherCode: 800,
+    avgRain: 0.0,
+};
 
 export default Card

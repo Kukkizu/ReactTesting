@@ -23,18 +23,22 @@ function App() {
     const [apiOutput, setApiOutput] = useState();
 
     function fetchWeatherData(location) {
-        fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=imperial`)
+        const city = location[0];
+        const state = location[1];
+
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city},${state}&appid=${apiKey}&units=imperial`)
             .then(function(response) {
                 return response.json();
             })
             .then(function(data) {
                 //const relData = parseUsefulData(data).then( () => setApiOutput(relData));
                 const relData = parseUsefulData(data);
+                relData.push(state);
                 setApiOutput(relData);
                 
             })
             .catch(function(error) {
-                dPrint('Error fetching weather data:', error);
+                console.error('Error fetching weather data:', error);
                 setApiOutput(null);
             });
     }
@@ -51,12 +55,12 @@ function App() {
         const country = data.city.country;
 
         const sixDayWeather = [
-            {id: 0, dayOfWeek: "", monthDay: "", avgTemp: null, weatherCode: null, avgRain: null},
-            {id: 1, dayOfWeek: "", monthDay: "", avgTemp: null, weatherCode: null, avgRain: null},
-            {id: 2, dayOfWeek: "", monthDay: "", avgTemp: null, weatherCode: null, avgRain: null},
-            {id: 3, dayOfWeek: "", monthDay: "", avgTemp: null, weatherCode: null, avgRain: null},
-            {id: 4, dayOfWeek: "", monthDay: "", avgTemp: null, weatherCode: null, avgRain: null},
-            {id: 5, dayOfWeek: "", monthDay: "", avgTemp: null, weatherCode: null, avgRain: null},
+            {id: 0, dayOfWeek: "", monthDay: "", avgTemp: 0, weatherCode: null, avgRain: null},
+            {id: 1, dayOfWeek: "", monthDay: "", avgTemp: 0, weatherCode: null, avgRain: null},
+            {id: 2, dayOfWeek: "", monthDay: "", avgTemp: 0, weatherCode: null, avgRain: null},
+            {id: 3, dayOfWeek: "", monthDay: "", avgTemp: 0, weatherCode: null, avgRain: null},
+            {id: 4, dayOfWeek: "", monthDay: "", avgTemp: 0, weatherCode: null, avgRain: null},
+            {id: 5, dayOfWeek: "", monthDay: "", avgTemp: 0, weatherCode: null, avgRain: null},
         ];
 
 
@@ -107,10 +111,10 @@ function App() {
 
             sixDayWeather[j].avgTemp = Math.floor(totalTemp / tempTimePeriods);
 
-            if (rainTimePeriods == 0){
+            if (rainTimePeriods != 0){
                 sixDayWeather[j].avgRain = (totalRain / rainTimePeriods).toFixed(2);
             }else{
-                sixDayWeather[j].avgRain = NULL;
+                sixDayWeather[j].avgRain = -1;
             }
         }
 
@@ -125,7 +129,7 @@ function App() {
         dPrint(allCodes);
         dPrint(JSON.stringify(sixDayWeather));
         dPrint("L = "+data.list.length);
-        dPrint(data.list[35].rain['3h']);
+        //dPrint(data.list[35].rain['3h']);
 
         return [city, country, sixDayWeather];
 
