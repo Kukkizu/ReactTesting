@@ -1,5 +1,6 @@
 
 import Card from './Card.jsx'
+import PropTypes from 'prop-types';
 
 function CardRow(props){
 
@@ -8,7 +9,7 @@ function CardRow(props){
     const data = props.data[2];
     const state = props.data[3];
 
-    console.log(`${city}, ${state},${country}`);
+    console.log(`${city}, ${state}, ${country}`);
     console.log("props:\n\n" + JSON.stringify(data));
 
     const flexStyles = {
@@ -24,6 +25,10 @@ function CardRow(props){
         avgTemp= {day.avgTemp}
         weatherCode = {day.weatherCode}
         avgRain = {day.avgRain}></Card>);
+
+    CardRow.propTypes = {
+        data: PropTypes.array.isRequired,
+    };
 
     return(
 

@@ -1,22 +1,16 @@
 import React, { useState, useEffect } from "react";
 import SearchBarButton from './SearchBarButton.jsx'
 import CardRow from './CardRow.jsx'
-import apiKey from './key.js'
+import {owmKey} from './key'
+import Container from '@mui/material/Container'
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+
+
 //import dPrint from "./debug.js";
 
-const bodyStyle = {
-    backgroundColor: "",
-    display: "flex",
-    justifyContent: "center",
-    padding: "4rem"
-};
 
-const columnStyle = {
-    display: "flex",
-    flexDirection: "column",
-}
-
-const debug = true;
+const debug = false;
 
 function App() {
     const [userInput, setUserInput] = useState("");
@@ -26,7 +20,11 @@ function App() {
         const city = location[0];
         const state = location[1];
 
-        fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city},${state}&appid=${apiKey}&units=imperial`)
+        const stateString = (state) ? `,${state},US` : ``
+
+        console.log("SSSSSSSS: "+stateString);
+
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}${stateString}&appid=${owmKey}&units=imperial`)
             .then(function(response) {
                 return response.json();
             })
@@ -66,7 +64,6 @@ function App() {
 
         const allCodes = [[],[],[],[],[],[]];
         const allDays = [];
-        const allDateObj = [];
         var i = 0;
 
         for (var j = 0; j < 6; j++){
@@ -165,12 +162,18 @@ function App() {
     }, [userInput]);
 
     return (
-        <div style={bodyStyle}>
-            <div style={columnStyle}>
+        <>
+            <Container sx={{ p: 14 }} maxWidth="md">
+            <Typography sx={{ m: 4 }} align="center" variant="h3">
+                Weather Forecast Search 🌞
+            </Typography>
+            <Stack direction="column" spacing={2}>
                 <SearchBarButton searchInput={handleUserInput} />
                 {apiOutput && <CardRow data={apiOutput} />}
-            </div>
-        </div>
+            </Stack>
+            </Container>
+        </>
+        
     );
 }
 

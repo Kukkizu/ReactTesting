@@ -3,3 +3,5 @@ test1/my-react-app/src/key.js
 *.js
 *.js
 test2/my-react-app/src/key.js
+node_modules
+test2/my-react-app/src/key.js

@@ -43,7 +43,7 @@ Card.propTypes = {
     monthDay: PropTypes.string.isRequired,
     avgTemp: PropTypes.number.isRequired,
     weatherCode: PropTypes.number.isRequired,
-    avgRain: PropTypes.number.isRequired,
+    avgRain: PropTypes.any.isRequired,
 };
 
 Card.defaultProps = {

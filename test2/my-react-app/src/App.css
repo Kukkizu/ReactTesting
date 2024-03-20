@@ -33,9 +33,22 @@
   }
 }
 
+/* Example CSS for responsiveness */
 .card {
-  padding: 2em;
+    /* Your card styles */
+    width: 300px; /* Default width for larger screens */
+    height: 200px; /* Default height for larger screens */
+    padding: 2rem;
 }
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .card {
+        width: 100%; /* Make the card fill the width of the screen */
+        height: auto; /* Allow the height to adjust based on content */
+    }
+}
+
 
 .read-the-docs {
   color: #888;
