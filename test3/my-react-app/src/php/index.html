@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Form!</title>
+</head>
+<body style="font-family: Roboto; font-size:30px">
+
+    <form method="POST" action="upload.php" enctype="multipart/form-data" style="display: flex; justify-content: center">
+        <div>
+            <label for="image">Image File:</label><br>
+            <input type="file" name="image" id="image" style="font-family: Roboto; font-size:20px">
+            <br><br>
+            <label for="name">Name:</label><br>
+            <input type="text" name="name" id="name" style="font-family: Roboto; font-size:20px">
+            <br><br>
+            <label for="price">Price:</label><br>
+            <input type="text" name="price" id="price" style="font-family: Roboto; font-size:20px">
+            <br><br>
+            <label for="category">Category:</label><br>
+            <select name="category" style="font-family: Roboto; font-size:20px; width: 100%;">
+                <option value="framed print">framed print</option>
+                <option value="unframed print">unframed print</option>
+                <option value="tote bag">tote bag</option>
+            </select>
+            <br><br>
+            <label for="status">Status:</label><br>
+            <select name="status" id="status" style="font-family: Roboto; font-size:20px; width: 100%;">
+                <option value="available">available</option>
+                <option value="on hold">on hold</option>
+                <option value="sold">sold</option>
+            </select>
+            <br><br>
+    
+            <input type="submit" name="submit" style="font-family: Roboto; font-size:20px; width: 100%;">
+        </div>
+    </form>
+    
+</body>
+</html>
